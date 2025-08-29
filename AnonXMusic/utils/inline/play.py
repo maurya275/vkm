@@ -47,47 +47,27 @@ def create_bar(played_sec, duration_sec):
     remaining = "─" * (9 - position)
     
     return f"{filled}{current}{remaining}"
-
-
-
-
-def stream_markup_timer(_, chat_id, played, dur):
-    played_sec = time_to_seconds(played)
-    duration_sec = time_to_seconds(dur)
-    
-    # Create progress bar
-    bar = create_bar(played_sec, duration_sec)
-    
-    # Get timestamp for unique callback
-    timestamp = get_time_stamp()
-    
-    # Get current beat frame with ultra-fast animation
-    current_frame = get_beat_frame()
-
     buttons = [
         [
             InlineKeyboardButton(
-                text=f"{played} {bar} {dur}",
+                text=f"{played} {ba} {dur}",
                 callback_data="GetTimer",
             )
         ],
         [
+            
+            InlineKeyboardButton(text="❚❚ ", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"), 
             InlineKeyboardButton(
-                text="❚❚", 
-                callback_data=f"ADMIN Pause|{chat_id}"
-            ),
-            InlineKeyboardButton(
-                text="✯", 
-                callback_data="close"
-            ),
-            InlineKeyboardButton(
-                text="►►", 
-                callback_data=f"ADMIN Skip|{chat_id}"
+                text="|►►", callback_data=f"ADMIN Skip|{chat_id}"
             ),
         ],
+        
+        # [
+        #     InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"), 
+        # ],
     ]
     return buttons
-
 
 
 def stream_markup(_, chat_id):
