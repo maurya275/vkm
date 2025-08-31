@@ -15,13 +15,6 @@ def start_panel(_):
         [
             InlineKeyboardButton(text=_["ST_B_3"], callback_data="LG"),
         ],
-        [
-            InlineKeyboardButton(
-                text=_["S_B_1"], url=f"https://t.me/{app.username}?startgroup=true"
-            ),   
-
-            InlineKeyboardButton(text="Command", url=f""),
-        ],
     ]
     return buttons
 
@@ -36,10 +29,10 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(
-                text=_["S_B_1"], url=f"https://telegra.ph/FFcg-08-31"
-            ),   
+                text="Help",
+                callback_data="settings_back_helper",
 
-            InlineKeyboardButton(text="new Fe Command", url=f"https://telegra.ph/FFcg-08-31"),
+            InlineKeyboardButton(text="New Feacture, url=f"https://telegra.ph/FFcg-08-31"),
         ],
         
         [
