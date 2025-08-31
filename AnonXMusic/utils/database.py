@@ -6,6 +6,8 @@ from typing import Dict, List, Union
 from AnonXMusic import userbot
 from AnonXMusic.core.mongo import mongodb
 
+
+songrequestdb = mongodb.songrequests
 groupstatsdb = mongodb.groupstats
 authdb = mongodb.adminauth
 authuserdb = mongodb.authuser
@@ -728,4 +730,19 @@ async def get_top_groups(limit: int = 10) -> list:
         top_groups.append(group)
     return top_groups
 
+
+async def get_top_groups_by_requests(limit: int = 10) -> list:
+    """Get top groups by total song requests"""
+    cursor = songrequestdb.find(
+        {"chat_id": {"$lt": 0}}
+    ).sort("total_requests", -1).limit(limit)
+    
+    top_groups = []
+    async for group in cursor:
+        top_groups.append(group)
+    return top_groups
+
+async def get_group_request_stats(chat_id: int) -> dict:
+    """Get detailed stats for a specific group"""
+    return await songrequestdb.find_one({"chat_id": chat_id})
 
